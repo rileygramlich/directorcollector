@@ -1,23 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Director List</h1>
+<h1>Director Details</h1>
 
-{% for director in directors %}
   <div class="card">
-    <a href="{% url 'detail' director.id %}">
+    <a href="{% url 'detail' director.id %}"></a>
     <div class="card-content">
       <span class="card-title">{{ director.name }}</span>
       <p>Nationality: {{ director.nationality }}</p>
       <p>Description: {{ director.description }}</p>
-      {% if director.age != 0 %}
         <p>Age: {{ director.age }}</p>
-      {% else %}
-        <p>Age: Dead</p>
-      {% endif %}
     </div>
-  </a>
   </div>
-{% endfor %}
 
 {% endblock %}

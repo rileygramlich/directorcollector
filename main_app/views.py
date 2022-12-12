@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Director
 
 
 # class Director: 
@@ -18,10 +19,15 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return HttpResponse('<h1>Hello welcome to the Director Collector</h1> ') # render homepage later
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
 
 def directors_index(request):
+    directors = Director.objects.all()
     return render(request, 'directors/index.html', { 'directors': directors})
+
+def directors_detail(request, director_id):
+  director = Director.objects.get(id=director_id)
+  return render(request, 'directors/detail.html', {'director': director})
