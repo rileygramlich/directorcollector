@@ -1,20 +1,19 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Director
 
 
-# class Director: 
-#   def __init__(self, name, nationality, description, age):
-#     self.name = name
-#     self.nationality = nationality
-#     self.description = description
-#     self.age = age
+class DirectorCreate(CreateView):
+    model = Director
+    fields = '__all__'
 
-# directors = [
-#   Director('Martin Scorsese', 'American', 'Master of crime dramas', 80),
-#   Director('Christopher Nolan', 'British', 'Loves to use non-linear story-telling', 52),
-#   Director('Akira Kurosawa', 'Japanese', 'Legendary sammurai movie director', 0)
-# ]
+class DirectorUpdate(UpdateView):
+    model = Director
+    fields = ['nationality', 'description', 'age']
+
+class DirectorDelete(DeleteView):
+    model = Director
+    success_url = '/directors/'
 
 
 # Create your views here.
@@ -31,3 +30,18 @@ def directors_index(request):
 def directors_detail(request, director_id):
   director = Director.objects.get(id=director_id)
   return render(request, 'directors/detail.html', {'director': director})
+
+
+#   Basic old way limited db:
+# class Director: 
+#   def __init__(self, name, nationality, description, age):
+#     self.name = name
+#     self.nationality = nationality
+#     self.description = description
+#     self.age = age
+
+# directors = [
+#   Director('Martin Scorsese', 'American', 'Master of crime dramas', 80),
+#   Director('Christopher Nolan', 'British', 'Loves to use non-linear story-telling', 52),
+#   Director('Akira Kurosawa', 'Japanese', 'Legendary sammurai movie director', 0)
+# ]
