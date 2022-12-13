@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Director
-
+from .forms import ShowingForm
 
 class DirectorCreate(CreateView):
     model = Director
@@ -29,7 +29,13 @@ def directors_index(request):
 
 def directors_detail(request, director_id):
   director = Director.objects.get(id=director_id)
-  return render(request, 'directors/detail.html', {'director': director})
+  showing_form = ShowingForm()
+  return render(request, 'directors/detail.html', {
+    'director': director,
+    'showing_form': showing_form
+    })
+
+
 
 
 #   Basic old way limited db:

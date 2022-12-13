@@ -2,22 +2,60 @@
 
 <h1>Director Details</h1>
 
-<div class="card">
-  <a href="{% url 'detail' director.id %}"></a>
-  <div class="card-content">
-    <span class="card-title">{{ director.name }}</span>
-    <p>Nationality: {{ director.nationality }}</p>
-    <p>Description: {{ director.description }}</p>
-    {% if director.age != 0 %}
-    <p>Age: {{ director.age }}</p>
-    {% else %}
-    <p>Age: Dead</p>
-    {% endif %}
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <a href="{% url 'detail' director.id %}"></a>
+      <div class="card-content">
+        <span class="card-title">{{ director.name }}</span>
+        <p>Nationality: {{ director.nationality }}</p>
+        <p>Description: {{ director.description }}</p>
+        {% if director.age != 0 %}
+        <p>Age: {{ director.age }}</p>
+        {% else %}
+        <p>Age: Dead</p>
+        {% endif %}
+      </div>
+      <div class="card-action">
+        <a href="{% url 'directors_update' director.id %}">Edit</a>
+        <a href="{% url 'directors_delete' director.id %}">Delete</a>
+      </div>
+    </div>
   </div>
-  <div class="card-action">
-    <a href="{% url 'directors_update' director.id %}">Edit</a>
-    <a href="{% url 'directors_delete' director.id %}">Delete</a>
+
+  <div class="col s6">
+    <form method="post">
+      {% csrf_token %}
+      {{ showing_form.as_p }}
+      <input type="submit" class="btn" value="Add Showing">
+    </form>
+    <!-- <br>
+    {% if director.upcmoming_film %}
+      <div class="card-panel teal-text center-align">{{directer.name}} has at least one upcoming film.</div>
+    {% else %}
+      <div class="card-panel red-text center-align">{{directer.name}} no upcoming films to list.</div>
+    {% endif %} -->
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Movie Title</th>
+          <th>Genre</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for showing in director.showing_set.all %}
+        <tr>
+          <td>{{showing.date}}</td>
+          <td>{{showing.name}}</td>
+          <td>{{showing.get_genre_display}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
+
+<script src="../../static/js/materialize.js"></script>
 
 {% endblock %}
