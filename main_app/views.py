@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Director
 from .forms import ShowingForm
@@ -35,7 +35,13 @@ def directors_detail(request, director_id):
     'showing_form': showing_form
     })
 
-
+def add_showing(request, director_id):
+  form = ShowingForm(request.POST)
+  if form.is_valid():
+    new_showing = form.save(commit=False)
+    new_showing.director_id = director_id
+    new_showing.save()
+  return redirect('detail', director_id=director_id)
 
 
 #   Basic old way limited db:

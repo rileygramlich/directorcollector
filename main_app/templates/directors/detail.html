@@ -24,17 +24,11 @@
   </div>
 
   <div class="col s6">
-    <form method="post">
+    <form action="{% url 'add_showing' director.id %}" method="post">
       {% csrf_token %}
       {{ showing_form.as_p }}
       <input type="submit" class="btn" value="Add Showing">
     </form>
-    <!-- <br>
-    {% if director.upcmoming_film %}
-      <div class="card-panel teal-text center-align">{{directer.name}} has at least one upcoming film.</div>
-    {% else %}
-      <div class="card-panel red-text center-align">{{directer.name}} no upcoming films to list.</div>
-    {% endif %} -->
     <table class="striped">
       <thead>
         <tr>

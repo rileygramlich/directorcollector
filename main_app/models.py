@@ -9,12 +9,23 @@ GENRES = (
     ('A', 'action'),
 )
 
+class Nomination(models.Model):
+    type = models.CharField(max_length=100)
+    won = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.type
+
+    def get_absolute_url(self):
+        return reverse('nomination_detail', kwargs={'pk': self.id})
+
 # Create your models here.
 class Director(models.Model): 
     name = models.CharField(max_length=100)
     nationality = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    nominations = models.ManyToManyField(Nomination)
 
     def __str__(self):
         return self.name
@@ -22,11 +33,14 @@ class Director(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'director_id': self.id})
 
-    # def film_within_4years(self):
-    #     four_years_from_now = (date.today() + timedelta(days=1461))
-    #     print(four_years_from_now)
-    #     film_within_4Years = self.showing_set.filter(date.today() > date > timedelta(days=1461)))
-    #     return film_within_4Years
+    def film_within_4years(self):
+        print(f'Printing showing set: {self.showing_set}')
+        film_release = self.showing_set.filter(date.today() > date > timedelta(days=1461))
+        return film_release
+
+    def showing_a_film(self):
+        isnt_showing = Showing.objects.exclude(id__in = self.showing_set.all().values_list('id'))
+        return isnt_showing
 
 class Showing(models.Model):
     date = models.DateField()
@@ -42,3 +56,5 @@ class Showing(models.Model):
     def __str__(self):
         #get_genre_display() built in with django?
         return f"The {self.get_genre_display()} {self.name} is showing on {self.date}."
+
+

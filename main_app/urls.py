@@ -8,5 +8,7 @@ urlpatterns = [
     path('directors/<int:director_id>', views.directors_detail, name='detail'),
     path('directors/create/', views.DirectorCreate.as_view(), name='directors_create'),
     path('directors/<int:pk>/update/', views.DirectorUpdate.as_view(), name='directors_update'),
-    path('directors/<int:pk>/delete/', views.DirectorDelete.as_view(), name='directors_delete')
+    path('directors/<int:pk>/delete/', views.DirectorDelete.as_view(), name='directors_delete'),
+    path('directors/<int:director_id>/add_showing/', views.add_showing, name='add_showing'),
+
 ]
