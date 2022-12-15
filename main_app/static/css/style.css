@@ -5,16 +5,20 @@ body {
     background-color: blanchedalmond;
   }
   
-  main {
-    flex: 1 0 auto;
-  }
+main {
+  flex: 1 0 auto;
+}
 
-  nav, footer.page-footer {
-    background-color: lightgreen;
-  }
+nav, footer.page-footer {
+  background-color: lightgreen;
+}
+
+footer.page-footer {
+  padding-top: 0;
+  text-align: right;
+}
   
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-  }
-  
+#id_won {
+  display: block;
+  height: 1000px;
+}

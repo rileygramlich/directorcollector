@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Nomination List</h1>
+
+{% for nomination in nomination_list %}
+  <a href="{% url 'nominations_detail' nomination.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ nomination.type }}</span>
+            <p>Won: {{ nomination.won }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

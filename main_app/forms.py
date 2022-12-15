@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Showing
+from .models import Showing, Nomination
 
 class ShowingForm(ModelForm):
     class Meta:
