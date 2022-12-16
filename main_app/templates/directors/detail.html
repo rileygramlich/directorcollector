@@ -57,13 +57,13 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">
-          {% if nomination.won %}
+          {% if nomination.result == 'won' %}
+            {{ nomination.type }}
             <span style="color: green">Won</span> 
-          {{ nomination.type }}
         </span>
-          {% else %}
-            <span style="color: red">Didn't win</span>
+        {% else %}
           {{ nomination.type }}
+            <span style="color: red">Didn't win</span>
         </span>
         {% endif %}
       </div>
@@ -85,13 +85,13 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              {% if nomination.won %}
-                <span style="color: green">Won</span> 
-              {{ nomination.type }}
+              {% if nomination.result == 'W' %}
+                {{ nomination.type }}
+                <span style="color: green">won</span> 
             </span>
               {% else %}
-                <span style="color: red">Didn't win</span>
-              {{ nomination.type }}
+                {{ nomination.type }}
+                <span style="color: red">lost</span>
             </span>
             {% endif %}
           </div>

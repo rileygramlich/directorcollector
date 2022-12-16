@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date, timedelta
+from django.contrib.auth.models import User
 
 GENRES = (
     ('D', 'drama'),
@@ -9,9 +10,18 @@ GENRES = (
     ('A', 'action'),
 )
 
+RESULTS = (
+    ('W', 'won'),
+    ('L', 'lost')
+)
+
 class Nomination(models.Model):
     type = models.CharField(max_length=100)
-    won = models.BooleanField(default=False)
+    result = models.CharField(
+    max_length=1,
+    choices=RESULTS,
+    default=RESULTS[0][0]
+  )
 
     def __str__(self):
         return self.type
@@ -26,6 +36,7 @@ class Director(models.Model):
     description = models.TextField(max_length=250)
     age = models.IntegerField()
     nominations = models.ManyToManyField(Nomination)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

@@ -4,11 +4,11 @@
 <h1>Nomination List</h1>
 
 {% for nomination in nomination_list %}
-  <a href="{% url 'nominations_detail' nomination.id %}">
+  <a href="{% url 'nomination_detail' nomination.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ nomination.type }}</span>
-            <p>Won: {{ nomination.won }}</p>
+            <p>Result {{ nomination.result }}</p>
         </div>
     </div>
   </a>

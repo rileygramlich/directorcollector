@@ -2,6 +2,11 @@
 {% block content %}
 
 <h1>Home</h1>
-<a href=" {% url 'index' %}">Directors</a>
+<ul>
+    <li><a href=" {% url 'index' %}">Directors</a></li>
+    <li><a href="{% url 'directors_create' %}">Add a Director</a></li>
+    <li><a href="{% url 'nominations_index' %}">Nominations</a></li>
+    <li><a href="{% url 'nominations_create' %}">Add a Nomination</a></li>
+</ul>
 
 {% endblock %}
